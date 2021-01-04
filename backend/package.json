@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "CRUD com API (backend) e Client (frontend) para gerenciamento de clientes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js --watch src"
+  },
+  "keywords": [],
+  "author": "Willian Cozzi Candido",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "sucrase": "^3.17.0"
+  }
+}
