@@ -1,0 +1,27 @@
+version: '3'
+
+services: 
+    users-db:
+        image: postgres:12
+        container_name: users-db
+        hostname: users-db
+        env_file: 
+            - ./.env
+        ports:
+            - '65432:5432'
+    users-api:
+        image: node:12
+        container_name: users-api
+        volumes: 
+            - ./src:/home/app/src
+        build:
+            dockerfile: Dockerfile
+            context: .
+        ports:
+            - '3000:3000'
+        environment: 
+            NODE_ENV: development
+            WAIT_HOSTS: users-db:5432
+        depends_on: 
+            - users-db
+        command: sh -c "/wait && npm run db:migrate && npm run db:seed && npm run start"

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js --watch src"
+    "start": "nodemon src/index.js --watch src",
+    "db:migrate": "npx sequelize db:migrate",
+    "db:seed": "npx sequelize db:seed:all"
   },
   "keywords": [],
   "author": "Willian Cozzi Candido",
