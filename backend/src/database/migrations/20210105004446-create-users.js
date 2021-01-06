@@ -10,25 +10,14 @@ module.exports = {
                 autoIncrement: true
             },
             name: {
-                allowNull: false,
-                type: Sequelize.STRING(70)
+                type: Sequelize.STRING
             },
             email: {
-                allowNull: false,
-                type: Sequelize.STRING(70),
+                type: Sequelize.STRING,
                 unique: true
             },
             tags: {
-                allowNull: false,
-                type: Sequelize.STRING(300)
-            },
-            created_at: {
-                type: Sequelize.DATE,
-                allowNull: false
-            },
-            updated_at: {
-                type: Sequelize.DATE,
-                allowNull: false
+                type: Sequelize.STRING
             }
         });
 

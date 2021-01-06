@@ -7,11 +7,11 @@ module.exports = {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    seederStorage: 'sequelize',
+    seerdStorage: 'sequelize',
     define: {
-        timestamps: 'true',
-        underscored: 'true',
-        underscoredAll: 'true',
+        timestamps: false,
+        underscored: true,
+        underscoredAll: true,
     }
 
 }

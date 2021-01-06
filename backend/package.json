@@ -19,7 +19,8 @@
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
     "request": "^2.88.2",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "yup": "^0.32.8"
   },
   "devDependencies": {
     "sequelize-cli": "^6.2.0",
