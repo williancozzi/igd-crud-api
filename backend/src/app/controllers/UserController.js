@@ -2,6 +2,7 @@ import User from '../models/User';
 import * as Yup from 'yup';
 
 class UserController {
+
     async index(req, res) {
         const user = await User.findAll();
 
@@ -38,6 +39,35 @@ class UserController {
             return res.status(400).json(error);
         }
 
+    }
+
+    async update(req, res) {
+        const schema = Yup.object().shape({
+
+            name: Yup.string(),
+            tags: Yup.string()
+
+        });
+
+        try {
+            const { id } = req.params;
+            const user = await User.findByPk(id);
+
+            if (!user) {
+                return res.status(400).json({ error: "User not found" });
+            }
+
+            const validFields = await schema.validate(req.body, {
+                abortEarly: false,
+                stripUnknown: true
+            });
+
+            const { name, tags } = await user.update(validFields);
+
+            return res.json({ name, tags });
+        } catch (error) {
+            return res.status(400).json(error);
+        }
     }
 }
 
