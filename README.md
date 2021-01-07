@@ -3,15 +3,16 @@
 ## Etapa teste - Desafio da empresa Ignição Digital
 
 ### Projeto criado utilizando:
-* __Node__, __Express__ (__nodemon__ para ficar com o reload do watch, __Sucrase__ para usar import ao invés de require, __Yup__ para validar o body do post e put);
+* __Node__ e __Express__; 
+* __nodemon__ para ficar com o reload do watch, __Sucrase__ para usar import ao invés de require, __Yup__ para validar o body do post e put;
 * __Sequelize__ no gerenciamento do banco de dados;
 * __Docker__ na conteinerização;
 * __PostgreSQL__ como banco;
-* __React__ no front.
+* __React__ no front, com __Materialize__ para deixar mais bonito e o __axios__ para fazer as requisições.
 
-Para rodar a aplicação, extraia o zip, acesse a pasta backend e rode "npm install"
-Em seguida, abra um novo terminal, acesse a pasta do client, e faça o mesmo procedimento.
+Para rodar a aplicação, extraia o zip, acesse a pasta backend e rode "npm install".
+Em seguida, rode o comando "docker-compose up --b" que fará a build e levantará o serviço do Docker.
 
-Depois, volte a pasta do backend para subir o Docker com o comando "docker-compose up --b" que fará a build e levantará o serviço.
-Acesse a pasta do client e rode "npm run start".
+Abra um novo terminal, acesse a pasta do client-manager, e dê o comando "npm install".
+Na pasta do client-manager rode "npm run start" ou "yarn start".
 
