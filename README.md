@@ -8,3 +8,10 @@
 * __Docker__ na conteinerização;
 * __PostgreSQL__ como banco;
 * __React__ no front.
+
+Para rodar a aplicação, extraia o zip, acesse a pasta backend e rode "npm install"
+Em seguida, abra um novo terminal, acesse a pasta do client, e faça o mesmo procedimento.
+
+Depois, volte a pasta do backend para subir o Docker com o comando "docker-compose up --b" que fará a build e levantará o serviço.
+Acesse a pasta do client e rode "npm run start".
+
