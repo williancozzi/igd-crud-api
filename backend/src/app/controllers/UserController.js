@@ -54,7 +54,7 @@ class UserController {
             const user = await User.findByPk(id);
 
             if (!user) {
-                return res.status(400).json({ error: "User not found" });
+                return res.status(400).json({ error: "User not found!" });
             }
 
             const validFields = await schema.validate(req.body, {
