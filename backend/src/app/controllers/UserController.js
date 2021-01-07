@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 
 class UserController {
 
-    async index(req, res) {
+    async getAll(req, res) {
         const user = await User.findAll();
 
         return res.json(user);
@@ -65,6 +65,24 @@ class UserController {
             const { name, tags } = await user.update(validFields);
 
             return res.json({ name, tags });
+        } catch (error) {
+            return res.status(400).json(error);
+        }
+    }
+
+    async delete(req, res) {
+        try {
+            const { id } = req.params;
+            const user = await User.findByPk(id);
+
+            if (!user) {
+                return res.status(400).json({ error: "User not found!" });
+            } else {
+                user.destroy(id);
+            }
+
+            return res.status(200).json({ message: `User ${id} deleted` });
+
         } catch (error) {
             return res.status(400).json(error);
         }
