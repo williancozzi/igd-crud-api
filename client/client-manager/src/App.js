@@ -12,6 +12,7 @@ function App() {
 
     const [users, setUsers] = React.useState([]);
 
+    // makes the first request to list users, and send to the component
     React.useEffect(() => {
         const fetchUser = async () => {
             const { data } = await api.get('/users');

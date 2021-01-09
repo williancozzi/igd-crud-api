@@ -12,6 +12,19 @@ code {
     monospace;
 }
 
+::placeholder {
+  color: rgba(65, 64, 64, 0.507);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgba(65, 64, 64, 0.507);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: rgba(65, 64, 64, 0.507);
+}
+
 #modal {
   position: fixed;
   bottom: 0vh;
@@ -192,14 +205,15 @@ code {
 
 #modal-add .container {
   background: #dfdfdf;
-  width: 30%;
+  width: 50%;
   margin-top: 75px;
   position: relative;
   display: flex;
-  height: 200px;
+  flex-direction: column;
+  height: 600px;
+  padding: 30px 0 30px;
   justify-content: space-evenly;
   align-items: flex-end;
-  padding: 40px;
 }
 
 #modal-add .container a {

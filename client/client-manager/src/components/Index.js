@@ -5,18 +5,23 @@ const api = axios.create({ baseURL: `http://localhost:3000` });
 
 export default function Index({ userList, setUsers }) {
     const users = userList;
+    const initialUser = {
+        name: "",
+        email: "",
+        tags: ""
+    };
     const [selectedID, setSelectedID] = React.useState(null);
     const [isModalOpen, setIsModalOpen] = React.useState(false)
-    let showModal = null;
+    const [isModalEditOpen, setIsModalEditOpen] = React.useState(false)
+    const [isModalAddOpen, setIsModalAddOpen] = React.useState(false)
+    const [newUser, setNewUser] = React.useState(initialUser);
 
-    // inicio da funçao que abre a modal de delete
     const openModalDelete = (e, id) => {
         e.preventDefault();
         setSelectedID(id);
         setIsModalOpen(true)
     }
 
-    //funçao que confirma a exclusao, dentro da modal
     const handleDelete = async () => {
         try {
             await api.delete(`/users/${selectedID}`);
@@ -24,56 +29,44 @@ export default function Index({ userList, setUsers }) {
             setIsModalOpen(false)
 
         } catch (error) {
-            console.log("Erro", error);
+            console.log("Error: ", error);
         }
     }
-    // inicio da funçao que abre a modal de edit
-    const openModalEdit = (e, id, flag) => {
+
+    const openModalEdit = (e, id) => {
         e.preventDefault();
         setSelectedID(id)
         console.log(id, 'id recebido de edit');
-        console.log(flag, 'flag recebida de edit');
-        showModal = !showModal;
-        const element = document.getElementById('modal-edit');
-
-        setTimeout(() => {
-            if (showModal) {
-                element.classList.add('modal-show-edit')
-            }
-            else {
-                element.classList.remove('modal-show-edit')
-            }
-        }, 100);
+        setIsModalEditOpen(true)
     }
 
-    // funçao que confirma a ediçao, dentro da modal
     const handleEditUser = async (e) => {
         console.log("editing", selectedID);
 
     }
-    // inicio da funçao que abre a modal de adicionar user
-    const openModalAdd = (e, id, flag) => {
-        e.preventDefault();
-        setSelectedID(id)
-        console.log(id, 'id recebido de add');
-        console.log(flag, 'flag recebida de add');
-        showModal = !showModal;
-        const element = document.getElementById('modal-add');
 
-        setTimeout(() => {
-            if (showModal) {
-                element.classList.add('modal-show-add')
-            }
-            else {
-                element.classList.remove('modal-show-add')
-            }
-        }, 100);
+    const openModalAdd = (e) => {
+        e.preventDefault();
+        setIsModalAddOpen(true)
     }
 
+    const handleAddInputNameChange = (event) => {
+        console.log(event.target.value, 'recebido ao digitar');
+    };
 
-    //funçao que confirma a inclusao de user, dentro da modal
+
+
+
+
     const handleAddUser = async (e) => {
-        console.log("adding", selectedID);
+        try {
+            //await api.create(`/users/${selectedID}`);
+            //setUsers(userList.filter(user => user.id !== selectedID));
+            setIsModalAddOpen(false)
+        } catch (error) {
+            console.log("Error: ", error);
+        }
+        console.log("adding");
     }
 
     const closeModal = () => {
@@ -106,7 +99,7 @@ export default function Index({ userList, setUsers }) {
                                     <td>
                                         <div style={styles.marginTable}>
                                             <button className="custom-button-edit"
-                                                onClick={event => openModalEdit(event, user.id, true)}
+                                                onClick={event => openModalEdit(event, user.id)}
                                                 value={user.id} style={{ marginLeft: "6%" }}>Editar
                                             </button>
                                         &nbsp;
@@ -126,12 +119,12 @@ export default function Index({ userList, setUsers }) {
 
                 <div style={styles.bottomDiv}>
                     <button className="custom-button-add"
-                        onClick={event => openModalAdd(event, null, false)}>Incluir novo usuário
+                        onClick={event => openModalAdd(event)}>Incluir novo usuário
                     </button>
                 </div>
             </div>
 
-            {/* Início das modais */}
+            {/* modals are below, delete is the first */}
 
             {isModalOpen &&
                 <div id="modal" className="modal-show">
@@ -140,36 +133,71 @@ export default function Index({ userList, setUsers }) {
                             <a href="/" onClick={closeModal} style={{ color: "black" }}>x</a>
                             <div style={styles.alignCenter}>
                                 Deseja realmente deletar?
-                        </div>
+                            </div>
                             <button style={styles.alignCenter} className="custom-button" onClick={event => handleDelete(event)}>Deletar</button>
                         </div>
                     </div>
                 </div>
             }
 
-            <div id="modal-edit">
-                <div >
-                    <div className="container">
-                        <a href="/" onClick={event => openModalEdit(event)} style={{ color: "black" }}>x</a>
-                        <div style={styles.alignCenter}>
-                            editar
-                        </div>
-                        <button style={styles.alignCenter} className="custom-button-edit" onClick={event => handleEditUser(event)}>Salvar</button>
-                    </div>
-                </div>
-            </div>
+            {/* Edit modal  */}
 
-            <div id="modal-add">
-                <div >
-                    <div className="container">
-                        <a href="/" onClick={event => openModalAdd(event)} style={{ color: "black" }}>x</a>
-                        <div style={styles.alignCenter}>
-                            add
+            {isModalEditOpen &&
+                <div id="modal-edit" className="modal-show-edit">
+                    <div >
+                        <div className="container">
+                            <a href="/" onClick={closeModal} style={{ color: "black" }}>x</a>
+                            <div style={styles.alignCenter}>
+                                editar
+                            </div>
+                            <button style={styles.alignCenter} className="custom-button-edit" onClick={event => handleEditUser(event)}>Salvar</button>
                         </div>
-                        <button style={styles.alignCenter} className="custom-button-add" onClick={event => handleAddUser(event)}>Salvar</button>
                     </div>
                 </div>
-            </div>
+            }
+
+            {/* Add Modal */}
+
+            {isModalAddOpen &&
+                <div id="modal-add" className="modal-show-add">
+                    <div >
+                        <div className="container">
+                            <a href="/" onClick={closeModal} style={{ color: "black" }}>x</a>
+                            <div style={{ alignSelf: "center" }}>
+                                <h6>Incluir novo usuário</h6>
+                            </div>
+                            <div style={styles.inputCustom}>
+                                <div className="row">
+                                    <div className="input-field">
+                                        <input onChange={handleAddInputNameChange} id="name" type="text" className="validate"></input>
+                                        <label className="active" htmlFor="name">Nome</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style={styles.inputCustom}>
+                                <div className="row">
+                                    <div className="input-field">
+                                        <input id="email" type="text" className="validate"></input>
+                                        <label className="active" htmlFor="email">E-mail</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style={styles.inputCustom}>
+                                <div className="row">
+                                    <div className="input-field">
+                                        <input placeholder="Ex: Participou do evento de Janeiro, É aluno." id="tags" type="text" className="validate"></input>
+                                        <label className="active" htmlFor="tags">Tags</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button style={styles.alignCenter} className="custom-button-add" onClick={event => handleAddUser(event)}>Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            }
 
         </div >
     ) : null;
@@ -198,6 +226,13 @@ const styles = {
     },
     alignCenter: {
         alignSelf: "center"
+    },
+    inputCustom: {
+        color: "yellow",
+        alignSelf: "start",
+        marginLeft: "4%",
+        width: "90%",
+        marginTop: "6%"
     }
 
 }
