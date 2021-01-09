@@ -36,12 +36,33 @@ export default function Index({ userList, setUsers }) {
     const openModalEdit = (e, id) => {
         e.preventDefault();
         setSelectedID(id)
-        console.log(id, 'id recebido de edit');
         setIsModalEditOpen(true)
     }
 
+    const handleEditInputNameChange = (event) => {
+        const name = event.target.value;
+        setNewUser({ ...newUser, name: name });
+        console.log(name);
+    };
+
+    const handleEditInputTagsChange = (event) => {
+        const tags = event.target.value;
+        setNewUser({ ...newUser, tags: tags });
+        console.log(tags);
+    };
+
     const handleEditUser = async (e) => {
         console.log("editing", selectedID);
+        try {
+            //await api.create(`/users/${selectedID}`);
+            //setIsModalAddOpen(false)
+            if (newUser) {
+                console.log(newUser);
+            }
+
+        } catch (error) {
+            console.log("Error: ", error);
+        }
 
     }
 
@@ -51,22 +72,32 @@ export default function Index({ userList, setUsers }) {
     }
 
     const handleAddInputNameChange = (event) => {
-        console.log(event.target.value, 'recebido ao digitar');
+        const name = event.target.value;
+        setNewUser({ ...newUser, name: name });
     };
 
+    const handleAddInputEmailChange = (event) => {
+        const email = event.target.value;
+        setNewUser({ ...newUser, email: email });
+    };
 
+    const handleAddInputTagsChange = (event) => {
+        const tags = event.target.value;
+        setNewUser({ ...newUser, tags: tags });
+    };
 
-
-
-    const handleAddUser = async (e) => {
+    const handleAddUser = (e) => {
         try {
             //await api.create(`/users/${selectedID}`);
-            //setUsers(userList.filter(user => user.id !== selectedID));
-            setIsModalAddOpen(false)
+            //setIsModalAddOpen(false)
+            if (newUser) {
+                console.log(newUser);
+            }
+
         } catch (error) {
             console.log("Error: ", error);
         }
-        console.log("adding");
+
     }
 
     const closeModal = () => {
@@ -147,9 +178,27 @@ export default function Index({ userList, setUsers }) {
                     <div >
                         <div className="container">
                             <a href="/" onClick={closeModal} style={{ color: "black" }}>x</a>
-                            <div style={styles.alignCenter}>
-                                editar
+                            <div style={{ alignSelf: "center" }}>
+                                <h6>Editar usuário</h6>
                             </div>
+                            <div style={styles.inputCustom}>
+                                <div className="row">
+                                    <div className="input-field">
+                                        <input onChange={handleEditInputNameChange} id="name" type="text" className="validate"></input>
+                                        <label className="active" htmlFor="name">Nome</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style={styles.inputCustom}>
+                                <div className="row">
+                                    <div className="input-field">
+                                        <input onChange={handleEditInputTagsChange} placeholder="Ex: Participou do evento de Janeiro, É aluno." id="tags" type="text" className="validate"></input>
+                                        <label className="active" htmlFor="tags">Tags</label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <button style={styles.alignCenter} className="custom-button-edit" onClick={event => handleEditUser(event)}>Salvar</button>
                         </div>
                     </div>
@@ -178,7 +227,7 @@ export default function Index({ userList, setUsers }) {
                             <div style={styles.inputCustom}>
                                 <div className="row">
                                     <div className="input-field">
-                                        <input id="email" type="text" className="validate"></input>
+                                        <input onChange={handleAddInputEmailChange} id="email" type="text" className="validate"></input>
                                         <label className="active" htmlFor="email">E-mail</label>
                                     </div>
                                 </div>
@@ -187,7 +236,7 @@ export default function Index({ userList, setUsers }) {
                             <div style={styles.inputCustom}>
                                 <div className="row">
                                     <div className="input-field">
-                                        <input placeholder="Ex: Participou do evento de Janeiro, É aluno." id="tags" type="text" className="validate"></input>
+                                        <input onChange={handleAddInputTagsChange} placeholder="Ex: Participou do evento de Janeiro, É aluno." id="tags" type="text" className="validate"></input>
                                         <label className="active" htmlFor="tags">Tags</label>
                                     </div>
                                 </div>

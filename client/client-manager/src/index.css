@@ -136,14 +136,15 @@ code {
 
 #modal-edit .container {
   background: #dfdfdf;
-  width: 30%;
+  width: 50%;
   margin-top: 75px;
   position: relative;
   display: flex;
-  height: 200px;
+  flex-direction: column;
+  height: 500px;
+  padding: 30px 0 30px;
   justify-content: space-evenly;
   align-items: flex-end;
-  padding: 40px;
 }
 
 #modal-edit .container a {
