@@ -31,6 +31,28 @@ export default function Index({ userList }) {
         window.location.reload();
     }
 
+    const openModal = (e, id) => {
+        e.preventDefault();
+        userId = id;
+        console.log(id, 'id recebido');
+        showModal = !showModal;
+        const element = document.getElementById('modal-edit');
+
+        setTimeout(() => {
+            if (showModal) {
+                element.classList.add('modal-show-edit')
+            }
+            else {
+                element.classList.remove('modal-show-edit')
+            }
+        }, 250);
+    }
+
+    const handleEdit = async (e) => {
+        console.log("editing", userId);
+
+    }
+
     return users ? (
         <div style={styles.topDiv}>
             <div>
@@ -56,7 +78,10 @@ export default function Index({ userList }) {
                                     <td>{user.tags}</td>
                                     <td>
                                         <div style={styles.marginTable}>
-                                            <button className="waves-effect waves-light btn">Editar</button>
+                                            <button className="custom-button-edit"
+                                                onClick={event => openModal(event, user.id)}
+                                                value={user.id} style={{ marginLeft: "6%" }}>Editar
+                                            </button>
                                         &nbsp;
 
                                             <button className="custom-button"
@@ -73,8 +98,8 @@ export default function Index({ userList }) {
                 </table>
 
                 <div style={styles.bottomDiv}>
-                    <button className="btn waves-effect waves-light" type="submit" name="action">Novo usuário
-                    <i className="material-icons right">add</i>
+                    <button className="custom-button-add"
+                        onClick={event => openModal(event)}>Incluir novo usuário
                     </button>
                 </div>
             </div>
@@ -87,6 +112,18 @@ export default function Index({ userList }) {
                             Deseja realmente deletar?
                         </div>
                         <button style={styles.alignCenter} className="custom-button" onClick={event => handleDelete(event)}>Deletar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modal-edit">
+                <div >
+                    <div className="container">
+                        <a href="/" onClick={event => openModal(event)} style={{ color: "black" }}>x</a>
+                        <div style={styles.alignCenter}>
+                            editar
+                        </div>
+                        <button style={styles.alignCenter} className="custom-button-edit" onClick={event => handleEdit(event)}>Salvar</button>
                     </div>
                 </div>
             </div>
@@ -107,7 +144,7 @@ const styles = {
     },
     bottomDiv: {
         marginTop: "4%",
-        marginRight: "4%",
+        marginRight: "2%",
         display: "flex",
         justifyContent: "flex-end"
     },
