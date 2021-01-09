@@ -11,3 +11,71 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#modal {
+  position: fixed;
+  bottom: 0vh;
+  left: 0vw;
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+  background: white;
+  z-index: 9999;
+  transform: translateY(140vh);
+  transition: all 250ms ease;
+}
+
+.modal-show {
+  transform: translateY(0vh) !important;
+  background-color: rgba(10, 10, 10, 0.726) !important;
+}
+
+#modal .container {
+  background: #dfdfdf;
+  width: 30%;
+  margin-top: 75px;
+  position: relative;
+  display: flex;
+  height: 200px;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  padding: 40px;
+}
+
+#modal .container a {
+  position: absolute;
+  top: 30px;
+  color: gray;
+  text-decoration: none;
+  font-size: 32px;
+  z-index: 9999;
+  right: 30px;
+  position: absolute;
+  top: 10px;
+  color: #666666;
+  text-decoration: none;
+  font-size: 32px;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.custom-button {
+  height: 40px;
+  border-radius: 12px;
+  padding: 0 12px;
+  border: none;
+  transition: all 0.2s;
+  background-color: #cc0000; 
+  color: #FFFFFF
+}
+
+.custom-button:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 6px 2px rgb(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.custom-button:focus {
+  outline: none;
+  background-color: #7e0000;  
+}

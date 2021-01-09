@@ -5,11 +5,29 @@ const api = axios.create({ baseURL: `http://localhost:3000` });
 
 export default function Index({ userList }) {
     const users = userList;
+    let showModal = false;
+    let userId = 0;
+
+    const openModalDelete = (e, id) => {
+        e.preventDefault();
+        userId = id;
+        console.log(id, 'id recebido');
+        showModal = !showModal;
+        const element = document.getElementById('modal');
+
+        setTimeout(() => {
+            if (showModal) {
+                element.classList.add('modal-show')
+            }
+            else {
+                element.classList.remove('modal-show')
+            }
+        }, 250);
+    }
 
     const handleDelete = async (e) => {
-        console.log("deleting", e.target.value);
-        const deletedId = await e.target.value;
-        await api.delete(`/users/${deletedId}`);
+        console.log("deleting", userId);
+        await api.delete(`/users/${userId}`);
         window.location.reload();
     }
 
@@ -24,10 +42,10 @@ export default function Index({ userList }) {
                     <thead>
 
                         <tr>
-                            <th>Nome</th>
-                            <th>E-mail</th>
-                            <th>Tags</th>
-                            <th>Ações</th>
+                            <th style={{ width: "25%" }}>Nome</th>
+                            <th style={{ width: "25%" }}>E-mail</th>
+                            <th style={{ width: "25%" }}>Tags</th>
+                            <th style={{ width: "25%" }}>Ações</th>
                         </tr>
 
                         {users.map((user, index) => {
@@ -40,7 +58,11 @@ export default function Index({ userList }) {
                                         <div style={styles.marginTable}>
                                             <button className="waves-effect waves-light btn">Editar</button>
                                         &nbsp;
-                                        <button value={user.id} style={{ marginLeft: "6%" }} className="waves-effect waves-light btn red" onClick={handleDelete}>Deletar</button>
+
+                                            <button className="custom-button"
+                                                onClick={event => openModalDelete(event, user.id)}
+                                                value={user.id} style={{ marginLeft: "6%" }}>Deletar
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -56,6 +78,19 @@ export default function Index({ userList }) {
                     </button>
                 </div>
             </div>
+
+            <div id="modal">
+                <div >
+                    <div className="container">
+                        <a href="/" onClick={event => openModalDelete(event)} style={{ color: "black" }}>x</a>
+                        <div style={styles.alignCenter}>
+                            Deseja realmente deletar?
+                        </div>
+                        <button style={styles.alignCenter} className="custom-button" onClick={event => handleDelete(event)}>Deletar</button>
+                    </div>
+                </div>
+            </div>
+
         </div >
     ) : null;
 }
@@ -80,6 +115,9 @@ const styles = {
         display: "flex",
         flexDirection: "column",
         textAlignLast: "center"
+    },
+    alignCenter: {
+        alignSelf: "center"
     }
 
 }

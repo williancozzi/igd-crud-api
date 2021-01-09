@@ -16,3 +16,4 @@ Em seguida, rode o comando "docker-compose up --b" que fará a build e levantar�
 Abra um novo terminal, acesse a pasta do client-manager, e dê o comando "npm install".
 Na pasta do client-manager rode "npm run start" ou "yarn start".
 
+Lembrando de ter o Postgres na máquina.
