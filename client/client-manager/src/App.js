@@ -24,7 +24,7 @@ function App() {
     return (
         <div>
             <Header></Header>
-            <Index userList={users}></Index>
+            <Index userList={users} setUsers={setUsers}></Index>
         </div>
     );
 }
