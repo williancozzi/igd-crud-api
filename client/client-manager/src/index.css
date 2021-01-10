@@ -52,7 +52,8 @@ code {
   height: 200px;
   justify-content: space-evenly;
   align-items: flex-end;
-  padding: 40px;
+  padding: 20px;
+  flex-direction: column;
 }
 
 #modal .container a {

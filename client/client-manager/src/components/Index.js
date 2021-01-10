@@ -279,7 +279,6 @@ const styles = {
         alignSelf: "start",
         marginLeft: "4%",
         width: "90%",
-        marginTop: "6%"
     }
 
 }
