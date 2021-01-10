@@ -16,7 +16,7 @@ Comece extraindo o zip, acesse a pasta backend e rode ```"npm install"```.
 Em seguida, rode o comando ```"docker-compose up --b"``` que fará a build e levantará o serviço do Docker.
 Se tudo ocorrer bem, aparecerá **__"API started on port 3000!"__** no seu terminal.
 
-Agora, abra um novo terminal, acesse a pasta do client-manager, e dê o comando "npm install".
+Agora, abra um novo terminal, acesse a pasta do client-manager, e dê o comando ```"npm install"```.
 Na pasta do client-manager, digite ```"npm run start"``` ou ```"yarn start"```. O backend vai rodar na porta 3000, 
 então quando ele perguntar se o front pode ser em outra porta, aperte ```"y"```.
 
