@@ -8,7 +8,7 @@
 * __Sequelize__ no gerenciamento do banco de dados;
 * __Docker__ na conteinerização;
 * __PostgreSQL__ como banco;
-* __React__ no front, com __Materialize__ para deixar mais bonito e o __axios__ para fazer as requisições.
+* __React__ no front, com __Materialize__ para a aparência e o __axios__ para simplificar na hora de fazer as requisições.
 
 Para rodar a aplicação, precisa ter o Docker e o Postgres na máquina.
 
