@@ -16,6 +16,7 @@ export default function Index({ userList, setUsers }) {
     const [isModalAddOpen, setIsModalAddOpen] = React.useState(false)
     const [newUser, setNewUser] = React.useState(initialUser);
 
+    // Delete
     const openModalDelete = (e, id) => {
         e.preventDefault();
         setSelectedID(id);
@@ -33,6 +34,7 @@ export default function Index({ userList, setUsers }) {
         }
     }
 
+    // Edit
     const openModalEdit = (e, id) => {
         e.preventDefault();
         setSelectedID(id)
@@ -42,23 +44,19 @@ export default function Index({ userList, setUsers }) {
     const handleEditInputNameChange = (event) => {
         const name = event.target.value;
         setNewUser({ ...newUser, name: name });
-        console.log(name);
     };
 
     const handleEditInputTagsChange = (event) => {
         const tags = event.target.value;
         setNewUser({ ...newUser, tags: tags });
-        console.log(tags);
     };
 
     const handleEditUser = async (e) => {
-        console.log("editing", selectedID);
         try {
-            //await api.create(`/users/${selectedID}`);
-            //setIsModalAddOpen(false)
-            if (newUser) {
-                console.log(newUser);
-            }
+            const response = await api.put(`/users/${selectedID}`, newUser);
+            console.log('Returned data:', response);
+            setIsModalEditOpen(false);
+            window.location.reload();
 
         } catch (error) {
             console.log("Error: ", error);
@@ -66,6 +64,7 @@ export default function Index({ userList, setUsers }) {
 
     }
 
+    // Add
     const openModalAdd = (e) => {
         e.preventDefault();
         setIsModalAddOpen(true)
@@ -86,13 +85,12 @@ export default function Index({ userList, setUsers }) {
         setNewUser({ ...newUser, tags: tags });
     };
 
-    const handleAddUser = (e) => {
+    const handleAddUser = async (e) => {
         try {
-            //await api.create(`/users/${selectedID}`);
-            //setIsModalAddOpen(false)
-            if (newUser) {
-                console.log(newUser);
-            }
+            const response = await api.post('/users', newUser)
+            console.log('Returned data:', response);
+            setIsModalAddOpen(false);
+            window.location.reload();
 
         } catch (error) {
             console.log("Error: ", error);
@@ -184,7 +182,7 @@ export default function Index({ userList, setUsers }) {
                             <div style={styles.inputCustom}>
                                 <div className="row">
                                     <div className="input-field">
-                                        <input onChange={handleEditInputNameChange} id="name" type="text" className="validate"></input>
+                                        <input onChange={handleEditInputNameChange} id="name" type="text" className="validate" required></input>
                                         <label className="active" htmlFor="name">Nome</label>
                                     </div>
                                 </div>
@@ -193,7 +191,7 @@ export default function Index({ userList, setUsers }) {
                             <div style={styles.inputCustom}>
                                 <div className="row">
                                     <div className="input-field">
-                                        <input onChange={handleEditInputTagsChange} placeholder="Ex: Participou do evento de Janeiro, É aluno." id="tags" type="text" className="validate"></input>
+                                        <input onChange={handleEditInputTagsChange} placeholder="Ex: Participou do evento de Janeiro, É aluno." id="tags" type="text" className="validate" required></input>
                                         <label className="active" htmlFor="tags">Tags</label>
                                     </div>
                                 </div>
@@ -263,8 +261,8 @@ const styles = {
         padding: "2%"
     },
     bottomDiv: {
-        marginTop: "2%",
-        marginRight: "2%",
+        marginTop: "4%",
+        marginRight: "4%",
         display: "flex",
         justifyContent: "flex-end"
     },
