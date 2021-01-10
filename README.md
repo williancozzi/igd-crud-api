@@ -10,10 +10,14 @@
 * __PostgreSQL__ como banco;
 * __React__ no front, com __Materialize__ para deixar mais bonito e o __axios__ para fazer as requisições.
 
-Para rodar a aplicação, extraia o zip, acesse a pasta backend e rode "npm install".
-Em seguida, rode o comando "docker-compose up --b" que fará a build e levantará o serviço do Docker.
+Para rodar a aplicação, precisa ter o Docker e o Postgres na máquina.
 
-Abra um novo terminal, acesse a pasta do client-manager, e dê o comando "npm install".
-Na pasta do client-manager rode "npm run start" ou "yarn start".
+Comece extraindo o zip, acesse a pasta backend e rode ```"npm install"```.
+Em seguida, rode o comando ```"docker-compose up --b"``` que fará a build e levantará o serviço do Docker.
+Se tudo ocorrer bem, aparecerá **__"API started on port 3000!"__** no seu terminal.
 
-Lembrando de ter o Postgres na máquina.
+Agora, abra um novo terminal, acesse a pasta do client-manager, e dê o comando "npm install".
+Na pasta do client-manager, digite ```"npm run start"``` ou ```"yarn start"```. O backend vai rodar na porta 3000, 
+então quando ele perguntar se o front pode ser em outra porta, aperte ```"y"```.
+
+Como o repo está privado, eu subi também o __dotenv__, mas será necessário adequá-lo ao seu postgres.
