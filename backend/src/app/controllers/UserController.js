@@ -20,9 +20,9 @@ class UserController {
     async create(req, res) {
         const schema = Yup.object().shape({
 
-            name: Yup.string().required(),
-            email: Yup.string().email(),
-            tags: Yup.string().required()
+            name: Yup.string().required().max(50),
+            email: Yup.string().email().required().max(30),
+            tags: Yup.string().required().max(100)
 
         });
 
@@ -44,8 +44,8 @@ class UserController {
     async update(req, res) {
         const schema = Yup.object().shape({
 
-            name: Yup.string(),
-            tags: Yup.string()
+            name: Yup.string().max(50),
+            tags: Yup.string().max(100)
 
         });
 
