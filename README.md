@@ -1,7 +1,7 @@
 # igd-crud-api
 
 ## Etapa teste - Desafio da empresa Ignição Digital
-O projeto é um Cadastro de clientes, com banco de dados, onde é possível cadastrar, editar e excluir os clientes listados.
+O projeto é um cadastro de clientes, com banco de dados, onde é possível cadastrar, editar e excluir os clientes listados.
 
 ### Projeto criado utilizando:
 * __Node__ e __Express__; 
